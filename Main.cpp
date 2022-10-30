@@ -15,7 +15,7 @@ int main() {
     if (!glfwInit())
         return -1;
     
-    window = glfwCreateWindow(1920, 1080, "fuk u", NULL, NULL);
+    window = glfwCreateWindow(1920, 1080, "3D TriWorld", NULL, NULL);
 
     if (!window) {
         glfwTerminate();
