@@ -20,7 +20,6 @@ public:
 
 	glm::mat4 view;
 
-	float angle;
 
 	void run(GLFWwindow& window);
 	void mouseCallback(GLFWwindow* window, double xpos, double ypos);

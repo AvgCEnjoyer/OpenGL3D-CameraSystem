@@ -24,22 +24,23 @@ Cam3d::Cam3d() {
 	camUp = glm::cross(camDirection, camRight);
 
 	view = glm::lookAt(camPosition, camTarget, camUp);
-
 }
 
 void Cam3d::run(GLFWwindow& window) {
 
+	float sensitivity = 0.05f;
+
 	if (glfwGetKey(&window, GLFW_KEY_A) == GLFW_PRESS) {
-		camPosition -= glm::normalize(glm::cross(camTarget, camUp)) * 0.05f;
+		camPosition -= glm::normalize(glm::cross(camTarget, camUp)) * sensitivity;
 	}
 	if (glfwGetKey(&window, GLFW_KEY_D) == GLFW_PRESS) {
-		camPosition += glm::normalize(glm::cross(camTarget, camUp)) * 0.05f;
+		camPosition += glm::normalize(glm::cross(camTarget, camUp)) * sensitivity;
 	}
 	if (glfwGetKey(&window, GLFW_KEY_W) == GLFW_PRESS) {
-		camPosition += 0.05f * camTarget;
+		camPosition += sensitivity * camTarget;
 	}
 	if (glfwGetKey(&window, GLFW_KEY_S) == GLFW_PRESS) {
-		camPosition -= 0.05f * camTarget;
+		camPosition -= sensitivity * camTarget;
 	}
 
 	camTarget = glm::normalize(ncamTarget);

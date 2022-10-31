@@ -3,6 +3,7 @@
 #include "Triangle.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Mesh.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -16,8 +17,6 @@ GameApp::GameApp() {
     Projection = glm::perspective(glm::radians(90.0f), (float)1920 / (float)1080, 0.1f, 100.0f);
     camPosition = camera.camPosition;
     viewMatrix = Projection * camera.view;
-
-
 }
 
 void GameApp::setupProgram() {}
@@ -65,8 +64,6 @@ void GameApp::program_id0() {
     glGetUniformLocation(shader, "MVP");
     glUniformMatrix4fv(shader, 1, GL_FALSE, &viewMatrix[0][0]);
 
-   
-
 }
 
 void GameApp::program_id1() {
@@ -74,10 +71,12 @@ void GameApp::program_id1() {
     buf = GLBuffer(1000);
     buffer = &buf;
 
-    Triangle t = Triangle(glm::vec3(-0.5f, 0.0f, 0.0f), 
-                          glm::vec3(0.5f, 0.0f, 0.0f), 
-                          glm::vec3(0.0f, 1.0f, 0.0f));
-    t.bind(*buffer);
+    
+    Mesh mesh = Mesh("TriiWorld.obj");
+
+    for (int i = 0; i < mesh.meshData.size(); i++) {
+        buffer->pushData(mesh.meshData.at(i));
+    }
 
     vShader = getFileShader("VertexShader.vert");
     fShader = getFileShader("FragmentShader.frag");

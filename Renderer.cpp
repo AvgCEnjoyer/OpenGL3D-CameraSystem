@@ -22,7 +22,7 @@ void Renderer::render(GLFWwindow& window) {
     double lasttime = glfwGetTime();
 
     GameApp game = GameApp();
-    game.initProgram(0);
+    game.initProgram(1);
 
     glfwSetInputMode(&window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPosCallback(&window, mouseCallback);
